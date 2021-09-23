@@ -1,14 +1,28 @@
 <template>
     <header>
-        {{title}}
+        <h1>{{title}}</h1>
+        <Button />
     </header>
 </template>
 
 <script>
+import Button from "./Button.vue";
 export default {
     name : "Header",
+    //we can add more data for the props
+    /**
+     * props : {
+     *      title : {
+     *          type : String,
+     *          default : "Task Tracker"
+     *      }
+     * }
+     */
     props : {
         title : String
+    },
+    components : {
+        Button
     }
 }
 </script>
@@ -19,6 +33,8 @@ export default {
         justify-content: space-between;
         align-items: center;
         margin-bottom : 20px;
+    }
+    h1 {
         font-size: 2rem;
         font-weight: 600;
     }
