@@ -1,6 +1,6 @@
 <template>
     <div v-for="task in tasks" :key="task.id">
-        <Task @delete-task="deleteTask(task.id)" :task="task"/>
+        <Task @remove-reminder="removeReminder(task.id)" @delete-task="deleteTask(task.id)" :task="task"/>
     </div>
 </template>
 
@@ -14,10 +14,13 @@ export default {
     props : {
         tasks : Array
     },
-    emits : ["delete-task"],
+    emits : ["delete-task","remove-reminder"],
     methods : {
         deleteTask(id){
             this.$emit("delete-task",id)
+        },
+        removeReminder(id){
+            this.$emit("remove-reminder",id);
         }
     }
 }
@@ -25,5 +28,6 @@ export default {
 <style scoped>
     div {
         width: 100%;
+        transition: all 250ms ease-in-out;
     }
 </style>
