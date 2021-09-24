@@ -60,6 +60,7 @@ export default {
 }
 .container {
   width : 90%;
+  max-width: 650px;
   height: 60%;
   margin: 0 auto;
   padding: 20px;
