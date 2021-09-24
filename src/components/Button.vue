@@ -27,5 +27,10 @@ export default {
         color: #fff;
         border: none;
         border-radius: 3px;
+        transition: all 350ms ease-in-out;
+    }
+    button:hover{
+        cursor: pointer;
+        transform: scale(1.02);
     }
 </style>

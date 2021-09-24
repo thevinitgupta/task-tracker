@@ -1,7 +1,9 @@
 <template>
-    <div class="task">
-        <h3>{{task.text}}</h3>
-        <span class="reminder">{{task.day}}</span>
+    <div :class="[task.reminder? 'reminder' : '','task']">
+        <h3>{{task.text}}
+            <span class="delete-task">&#10060;</span>
+        </h3>
+        <span>{{task.day}}</span>
     </div>
 </template>
 
@@ -16,8 +18,9 @@ export default {
 
 <style scoped>
     .task {
+        box-sizing: border-box;
         font-family: Poppins, sans-serif;
-        width: 96%;
+        width: 99%;
         margin: 7px;
         padding: 10px;
         background-color: #e7e7e7;
@@ -29,6 +32,13 @@ export default {
         font-size: 1.3rem;
         font-weight: 500;
         margin: 5px 0;
+        display: flex;
+        justify-content: space-between;
     }
-    
+    .task.reminder {
+        border-left: solid 5px rgb(1, 161, 1);
+    }
+    .delete-task:hover {
+        cursor: pointer;
+    }
 </style>
