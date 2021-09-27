@@ -1,6 +1,7 @@
 <template>
   <div class="container">
     <Header title="Task Tracker"/>
+    <AddTask/>
     <Tasks @remove-reminder="removeReminder" @delete-task="deleteTask" :tasks="tasks"/>
   </div>
 </template>
@@ -8,11 +9,13 @@
 <script>
 import  Header  from "./components/Header.vue";
 import  Tasks  from "./components/Tasks.vue";
+import  AddTask  from "./components/AddTask.vue";
 export default {
   name: 'App',
   components: {
     Header,
-    Tasks
+    Tasks,
+    AddTask
   },
   data(){
     return {
@@ -42,7 +45,7 @@ export default {
       {
         id : 2,
         text : "Sudip's Birthday",
-        day : "October 21st at 12:00am",
+        day : "October 12th at 12:00am",
         reminder : true
       },
       {
@@ -68,7 +71,7 @@ export default {
   color: #2c3e50;
   margin-top : 10px;
   width: 100vw;
-  height: 90vh;
+  min-height: 90vh;
 }
 .container {
   width : 90%;
