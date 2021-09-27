@@ -25,7 +25,7 @@ export default {
         font-weight: 400;
         background-color: #08030cce;
         color: #fff;
-        border: none;
+        border: 2px solid #0f0f0f;
         border-radius: 3px;
         transition: all 350ms ease-in-out;
     }

@@ -50,7 +50,7 @@ export default {
         justify-content: space-between;
     }
     .task.reminder {
-        border-left: solid 5px rgb(1, 161, 1);
+        border-left: solid 5px #28DF99;
     }
     .delete-task:hover {
         cursor: pointer;
