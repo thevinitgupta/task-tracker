@@ -22,6 +22,7 @@
 </template>
 
 <script>
+const short = require('short-uuid');
 export default {
     name : "AddTask",
     data(){
@@ -40,8 +41,16 @@ export default {
             }
 
             const newTask = {
-                
-            }
+                id :short.generate(),
+                text : this.text,
+                day : this.day,
+                reminder : this.reminder 
+            };
+
+            this.$emit("add-task",newTask);
+            this.text = '';
+            this.day = '';
+            this.reminder = false;
         }
     }
 }
