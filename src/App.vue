@@ -29,8 +29,23 @@ export default {
     toggleAddTask(){
       this.showAddTask = !this.showAddTask;
     },
-    addTask(newTask){
-    this.tasks.push(newTask);
+    async addTask(newTask){
+      const res = await fetch("http://localhost:5000/task/",{
+        method : "POST",
+        headers : {
+          'Content-Type' : 'application/json'
+        },
+        body : JSON.stringify(newTask)
+      });
+      console.log(res);
+      if(res.status===200){
+        const json = await res.json();
+        console.log(json);
+        this.tasks.push(json.task);
+      }
+      else {
+        alert("Failed to add task!");
+      }
     },
     async deleteTask(_id){
       if(confirm("Are you sure?")){
@@ -65,7 +80,6 @@ export default {
           })
         })
         const resJSON = await res.json();
-          console.log(resJSON)
           if(resJSON.message === "Fields Updated!")
           task.reminder = !task.reminder;
           else {
