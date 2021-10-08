@@ -32,18 +32,29 @@ export default {
     addTask(newTask){
     this.tasks.push(newTask);
     },
-    deleteTask(id){
-      if(confirm("Are you sure?"))
-      this.tasks = this.tasks.filter((task)=> task.id!==id)
+    async deleteTask(_id){
+      if(confirm("Are you sure?")){
+        const res = await fetch(`http://localhost:5000/task/delete?id=${_id}`,{
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+        if(res.status===200)
+         this.tasks = this.tasks.filter((task)=> task._id!==_id)
+         else {
+           alert("Failed to delete!")
+         }
+      }
     },
     async fetchTasks(){
       const res = await fetch("http://localhost:5000/task/");
       const resJson = await res.json();
       return resJson.tasks;
     },
-    removeReminder(id){
+    removeReminder(_id){
       this.tasks.forEach((task)=>{
-        if(task.id==id)
+        if(task._id==_id)
         task.reminder = !task.reminder;
       })
     }

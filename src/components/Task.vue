@@ -1,7 +1,7 @@
 <template>
-    <div :title="[task.reminder? 'Double click to remove Reminder' : 'Double Click to add Reminder']" @dblclick="removeReminder(task.id)" :class="[task.reminder? 'reminder' : '','task']">
+    <div :title="[task.reminder? 'Double click to remove Reminder' : 'Double Click to add Reminder']" @dblclick="removeReminder(task._id)" :class="[task.reminder? 'reminder' : '','task']">
         <h3>{{task.text}}
-            <span @click="deleteTask(task.id)" class="delete-task">&#10060;</span>
+            <span @click="deleteTask(task._id)" class="delete-task">&#10060;</span>
         </h3>
         <span>{{task.day}}</span>
     </div>
@@ -14,11 +14,11 @@ export default {
         task : Object
     },
     methods :{
-        deleteTask(id){
-            this.$emit("delete-task",id);
+        deleteTask(_id){
+            this.$emit("delete-task",_id);
         },
-        removeReminder(id){
-            this.$emit("remove-reminder",id);
+        removeReminder(_id){
+            this.$emit("remove-reminder",_id);
         }
     }
 }
@@ -27,7 +27,7 @@ export default {
 <style scoped>
     .task {
         box-sizing: border-box;
-        font-family: Poppins, sans-serif;
+        font-family: 'Poppins', sans-serif;
         width: 99%;
         margin: 15px 7px;
         padding: 10px;
