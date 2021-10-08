@@ -36,6 +36,11 @@ export default {
       if(confirm("Are you sure?"))
       this.tasks = this.tasks.filter((task)=> task.id!==id)
     },
+    async fetchTasks(){
+      const res = await fetch("http://localhost:5000/task/");
+      const resJson = await res.json();
+      return resJson.tasks;
+    },
     removeReminder(id){
       this.tasks.forEach((task)=>{
         if(task.id==id)
@@ -43,27 +48,8 @@ export default {
       })
     }
   },
-  created(){
-    this.tasks = [
-      {
-        id : 1,
-        text : "Doctor's Appointment",
-        day : "October 7th at 05:30pm",
-        reminder : true
-      },
-      {
-        id : 2,
-        text : "Sudip's Birthday",
-        day : "October 12th at 12:00am",
-        reminder : true
-      },
-      {
-        id : 3,
-        text : "Gandhi Jayanti",
-        day : "October 2th at 08:00am",
-        reminder : false
-      }
-    ]
+  async created(){
+    this.tasks = await this.fetchTasks();
   }
 }
 </script>
