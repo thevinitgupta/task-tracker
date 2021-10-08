@@ -53,9 +53,25 @@ export default {
       return resJson.tasks;
     },
     removeReminder(_id){
-      this.tasks.forEach((task)=>{
-        if(task._id==_id)
-        task.reminder = !task.reminder;
+      this.tasks.forEach(async(task)=>{
+        if(task._id==_id){
+          const res = await fetch(`http://localhost:5000/task/update?id=${_id}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            reminder : !task.reminder
+          })
+        })
+        const resJSON = await res.json();
+          console.log(resJSON)
+          if(resJSON.message === "Fields Updated!")
+          task.reminder = !task.reminder;
+          else {
+            alert("Failed to toggle reminder!");
+          }
+        }
       })
     }
   },

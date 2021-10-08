@@ -19,7 +19,7 @@ export default {
         deleteTask(_id){
             this.$emit("delete-task",_id)
         },
-        removeReminder(id){
+        removeReminder(_id){
             this.$emit("remove-reminder",_id);
         }
     }
