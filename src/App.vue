@@ -37,11 +37,10 @@ export default {
         },
         body : JSON.stringify(newTask)
       });
-      console.log(res);
       if(res.status===200){
         const json = await res.json();
-        console.log(json);
         this.tasks.push(json.task);
+        this.toggleAddTask();
       }
       else {
         alert("Failed to add task!");
