@@ -1,6 +1,7 @@
 <template>
     <div :title="[task.reminder? 'Double click to remove Reminder' : 'Double Click to add Reminder']" @dblclick="removeReminder(task._id)" :class="[task.reminder? 'reminder' : '','task']">
-        <h3>{{task.text}}
+        <h3><span class="task-head">{{task.text}}</span>
+            <span class="edit-task">&#9999;</span>
             <span @click="deleteTask(task._id)" class="delete-task">&#10060;</span>
         </h3>
         <span>{{task.day}}</span>
@@ -52,7 +53,20 @@ export default {
     .task.reminder {
         border-left: solid 5px #28DF99;
     }
-    .delete-task:hover {
-        cursor: pointer;
+    .task-head{
+        flex: 0.8;
+    }
+    .edit-task {
+        flex: 0.10;
+        font-size: 1.7rem;
+        color: rgb(0, 0, 0);
+        transform: rotateZ(45deg) translateY(10px);
+        transition: all 300ms ease-in-out;
+    }
+    .delete-task {
+        flex: 0.05;
+    }
+    .edit-task:hover {
+        transform: rotateZ(45deg) translateY(10px) scale(1.15);
     }
 </style>
