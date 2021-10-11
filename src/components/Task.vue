@@ -1,6 +1,6 @@
 <template>
-    <div :title="[task.reminder? 'Double click to remove Reminder' : 'Double Click to add Reminder']" @dblclick="removeReminder(task._id)" :class="[task.reminder? 'reminder' : '','task']">
-        <div v-if="!showUpdateTask" class="task-data">
+    <div  @dblclick="removeReminder(task._id)" :class="[task.reminder? 'reminder' : '','task']">
+        <div v-if="!showUpdateTask" class="task-data" :title="[task.reminder? 'Double click to remove Reminder' : 'Double Click to add Reminder']">
             <h3><span class="task-head">{{task.text}}</span>
             <span @click="toggleUpdateTask()" class="edit-button">&#9999;</span>
             <span @click="deleteTask(task._id)" class="delete-task">&#10060;</span>
@@ -11,7 +11,7 @@
             <div class="update-form">
                 <input type="text" name="task-head" id="update-head" v-model="task.text">
                 <input type="text" name="task-day" id="update-head" v-model="task.day">
-                <Button text="Update Task" color="#3f2de2"/>
+                <Button @click="updateTask(task._id)" text="Update Task" color="#3f2de2"/>
             </div>
             <span @click="toggleUpdateTask()" class="return">&#8617;</span>
         </div>
@@ -42,6 +42,21 @@ export default {
         },
         removeReminder(_id){
             this.$emit("remove-reminder",_id);
+        },
+        async updateTask(_id){
+            console.log(this.task);
+            const res = await fetch(`http://localhost:5000/task/update?id=${_id}`,{
+            method : "PUT",
+            headers : {
+                'Content-Type' : 'application/json'
+            },
+            body : JSON.stringify(this.task)
+            });
+            const jsonRes = await res.json();
+            if(res.status==200){
+                console.log(res,jsonRes);
+                this.toggleUpdateTask();
+            }   
         }
     }
 }
@@ -101,10 +116,24 @@ export default {
         display: flex;
         justify-content: space-between;
     }
+    .update-form{
+        flex: 0.7;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    .update-form>input{
+        width: 80%;
+        height: 1.8rem;
+        font-size: 1.3rem;
+        color: #5c5c5c;
+        outline: #28DF99;
+        margin-bottom: 15px;
+    }
     .return {
-        flex: 0.15;
-        font-size: 1.6rem;
-        color: #05961d;
+        flex: 0.25;
+        font-size: 2rem;
+        color: #be0202;
         font-weight: 900;
     }
 </style>
